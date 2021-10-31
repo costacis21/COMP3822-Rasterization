@@ -8,6 +8,11 @@
 #include <iostream>
 #include <fstream>
 #include "pixelwidget.hpp"
+#include <math.h>
+
+
+
+
 
 
 void PixelWidget::DefinePixelValues(){ //add pixels here; write methods like this for the assignments
@@ -38,6 +43,21 @@ void PixelWidget::SetPixel(unsigned int i_column, unsigned int i_row, const RGBV
     _vec_rects[i_column][i_row] = rgb;
 }
 
+void PixelWidget::DrawLine(pixel start_p, pixel end_p){
+
+
+    for(double i=0.0f;i<=1.0f;i+=0.001f){
+
+        double x= fabs(end_p.x + (i * (start_p.x-end_p.x)));
+        double y= fabs(end_p.y + (i * (start_p.y-end_p.y)));
+
+        SetPixel((int)x,(int)y,RGBVal(255,0,255));
+
+    }
+
+
+}
+
 
 void PixelWidget::paintEvent( QPaintEvent * )
 {
@@ -57,6 +77,22 @@ void PixelWidget::paintEvent( QPaintEvent * )
 
   // here the pixel values defined by the user are set in the pixel array
   DefinePixelValues();
+
+
+  pixel a,b,c,d;
+  a.x=20.3;
+  a.y=0.0;
+  b.x=0.6;
+  b.y=20.8;
+
+  c.x=0.0;
+  c.y=0.0;
+  d.x=20.6;
+  d.y=20.8;
+
+
+  DrawLine(a,b);
+  DrawLine(d,c);
 
   for (unsigned int i_column = 0 ; i_column < _n_vertical; i_column++)
     for(unsigned int i_row = 0; i_row < _n_horizontal; i_row++){

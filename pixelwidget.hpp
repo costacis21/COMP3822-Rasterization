@@ -16,6 +16,11 @@
 class PixelWidget : public QWidget {
 public:
 
+    struct pixel{
+        float x;
+        float y;
+
+    };
   
   // set the number of pixels that the widget is meant to display
   PixelWidget
@@ -34,6 +39,10 @@ public:
 
   // Use the body of this function to experiment with rendering algorithms
   void DefinePixelValues();
+
+
+  //assignment1
+  void DrawLine(pixel start_p, pixel end_p);
 
 protected:
 
