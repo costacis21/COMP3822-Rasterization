@@ -19,6 +19,7 @@ public:
     struct pixel{
         float x;
         float y;
+        RGBVal rgbVal;
 
     };
   

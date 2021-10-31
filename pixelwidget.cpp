@@ -45,13 +45,35 @@ void PixelWidget::SetPixel(unsigned int i_column, unsigned int i_row, const RGBV
 
 void PixelWidget::DrawLine(pixel start_p, pixel end_p){
 
+    int r_diff=0,g_diff=0, b_diff=0;
 
-    for(double i=0.0f;i<=1.0f;i+=0.001f){
+    //calculate diffs
+    r_diff = (start_p.rgbVal._red - end_p.rgbVal._red);
+    g_diff = -(start_p.rgbVal._green - end_p.rgbVal._green);
+    b_diff = -(start_p.rgbVal._blue - end_p.rgbVal._blue);
+
+
+
+
+
+    for(double i=0.0f;i<=1.00f;i+=0.01f){
 
         double x= fabs(end_p.x + (i * (start_p.x-end_p.x)));
         double y= fabs(end_p.y + (i * (start_p.y-end_p.y)));
 
-        SetPixel((int)x,(int)y,RGBVal(255,0,255));
+        RGBVal newRGBVal;
+        //add accumulative diff to each rgb val
+        newRGBVal._red= (start_p.rgbVal._red + (r_diff*i));
+        newRGBVal._green= (start_p.rgbVal._green + (g_diff*i));
+        newRGBVal._blue= (start_p.rgbVal._blue + (b_diff*i));
+
+        //if diff exceeds max rgb val, remain ta max
+        newRGBVal._red >=255 ? newRGBVal._red = 255 : newRGBVal._red;
+        newRGBVal._green >=255 ? newRGBVal._green = 255 : newRGBVal._green;
+        newRGBVal._blue >=255 ? newRGBVal._blue = 255 : newRGBVal._blue;
+
+
+        SetPixel((int)x,(int)y,newRGBVal);
 
     }
 
@@ -82,13 +104,20 @@ void PixelWidget::paintEvent( QPaintEvent * )
   pixel a,b,c,d;
   a.x=20.3;
   a.y=0.0;
+  a.rgbVal=RGBVal(255,0,50);
+
   b.x=0.6;
   b.y=20.8;
+  b.rgbVal=RGBVal(0,100,100);
 
-  c.x=0.0;
+  c.x=50.0;
   c.y=0.0;
+  c.rgbVal=RGBVal(20,100,100);
+
   d.x=20.6;
   d.y=20.8;
+  d.rgbVal=RGBVal(100,255,200);
+
 
 
   DrawLine(a,b);
