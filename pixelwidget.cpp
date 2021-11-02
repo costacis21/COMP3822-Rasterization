@@ -46,10 +46,10 @@ void PixelWidget::SetPixel(unsigned int i_column, unsigned int i_row, const RGBV
 void PixelWidget::DrawLine(pixel start_p, pixel end_p){
 
 
-    for(double i=0.0f;i<=1.0f;i+=0.001f){
+    for(double i=1.0f;i>=0.00f;i-=0.01f){
 
-        double x= fabs(end_p.x + (i * (start_p.x-end_p.x)));
-        double y= fabs(end_p.y + (i * (start_p.y-end_p.y)));
+        double x= (end_p.x + (i * (start_p.x-end_p.x)));
+        double y= (end_p.y + (i * (start_p.y-end_p.y)));
 
         SetPixel((int)x,(int)y,RGBVal(255,0,255));
 
