@@ -58,8 +58,12 @@ void PixelWidget::DrawLine(pixel start_p, pixel end_p){
 
 
 
-    for(double i=1.0f;i>=0.00f;i-=0.01f){
+//    for(double i=1.0f;i>=0.00f;i-=0.01f){
 
+
+    for(double i =0.0f; i<=1.00f; i+=0.01f){
+//        double x = i*start_p.x + (1-i)*end_p.x;
+//        double y = i * start_p.y + (1-i)*end_p.y;
         double x= (end_p.x + (i * (start_p.x-end_p.x)));
         double y= (end_p.y + (i * (start_p.y-end_p.y)));
 
@@ -97,7 +101,7 @@ void PixelWidget::paintEvent( QPaintEvent * )
 
   // set window/viewport so that the size fits the screen, within reason
   p.setWindow(QRect(-1.,-1.,_n_vertical+2,_n_horizontal+2));
-  int side = qMin(width(), height());  
+  int side = qMin(width(), height());
   p.setViewport(0, 0, side, side);
 
   // black thin boundary around the cells
@@ -136,7 +140,7 @@ void PixelWidget::paintEvent( QPaintEvent * )
     for(unsigned int i_row = 0; i_row < _n_horizontal; i_row++){
       QRect rect(i_column,i_row,1,1);
       QColor c = QColor(_vec_rects[i_column][i_row]._red, _vec_rects[i_column][i_row]._green, _vec_rects[i_column][i_row]._blue);
-    
+
       // fill with color for the pixel
       p.fillRect(rect, QBrush(c));
       p.setPen(pen);
