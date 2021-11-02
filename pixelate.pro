@@ -9,3 +9,7 @@ QT += gui widgets
 
 # Input
 SOURCES += mainwindow.cpp pixelwidget.cpp
+
+HEADERS += \
+    RGBVal.hpp \
+    pixelwidget.hpp
