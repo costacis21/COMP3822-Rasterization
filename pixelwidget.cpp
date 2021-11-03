@@ -58,12 +58,10 @@ void PixelWidget::DrawLine(pixel start_p, pixel end_p){
 
 
 
-//    for(double i=1.0f;i>=0.00f;i-=0.01f){
 
 
     for(double i =0.0f; i<=1.00f; i+=0.01f){
-//        double x = i*start_p.x + (1-i)*end_p.x;
-//        double y = i * start_p.y + (1-i)*end_p.y;
+
         double x= (end_p.x + (i * (start_p.x-end_p.x)));
         double y= (end_p.y + (i * (start_p.y-end_p.y)));
 
@@ -92,6 +90,34 @@ void PixelWidget::DrawLine(pixel start_p, pixel end_p){
 }
 
 
+void PixelWidget::DrawTriangle(pixel p, pixel r, pixel q){
+
+    for(double a =0.0f; a<=1.0f; a+=0.01f){
+        for(double b =0.0f; b<=1.0f; b+=0.01f){
+
+            double x= (a*p.x + b*q.x + (1-a-b)* q.x);
+            double y= (a*p.y + b*q.y + (1-a-b)* q.y);
+            RGBVal newRGBVal;
+            //add accumulative diff to each rgb val
+            newRGBVal._red= a*p.rgbVal._red + b*q.rgbVal._red + (1-a-b)* q.rgbVal._red;
+            newRGBVal._green= a*p.rgbVal._green + b*q.rgbVal._green + (1-a-b)* q.rgbVal._green;
+            newRGBVal._blue= a*p.rgbVal._blue + b*q.rgbVal._blue + (1-a-b)* q.rgbVal._blue;
+
+
+
+            pixel x1;
+            x1.x =x;
+            x1.y = y;
+            x1.rgbVal = newRGBVal;
+            DrawLine(x1,r);
+        }
+
+
+    }
+
+
+}
+
 void PixelWidget::paintEvent( QPaintEvent * )
 {
 
@@ -112,29 +138,51 @@ void PixelWidget::paintEvent( QPaintEvent * )
   DefinePixelValues();
 
 
-  pixel a,b,c,d;
-  a.x=20.3;
-  a.y=0.0;
-  a.rgbVal=RGBVal(255,0,50);
+  pixel a,b,c,d,e,f,g,h,i;
+  a.x=5.0;
+  a.y=5.0;
+  a.rgbVal=RGBVal(255,0,0);
 
-  b.x=0.6;
-  b.y=20.8;
-  b.rgbVal=RGBVal(0,100,100);
-  DrawLine(b,a);
-
-
-
-  c.x=50.0;
-  c.y=0.0;
-  d.rgbVal=RGBVal(20,100,100);
-
-  d.x=20.6;
-  d.y=20.8;
-  c.rgbVal=RGBVal(100,255,200);
+  b.x=55.0;
+  b.y=5.5;
+  b.rgbVal=RGBVal(0,255,0);
 
 
 
-  DrawLine(d,c);
+  c.x=30.0;
+  c.y=50.0;
+  c.rgbVal=RGBVal(0,0,255);
+
+  DrawTriangle(a,b,c);
+
+  d.x = 2.5;
+  d.y = 50.0;
+  d.rgbVal = RGBVal(0,0,255);
+
+  e.x = 2.5;
+  e.y = 5.0;
+  e.rgbVal = RGBVal(255,0,0);
+  DrawLine(e,d);
+
+  f.x = 5.0;
+  f.y = 50.0;
+  f.rgbVal = RGBVal(255,0,0);
+
+  g.x = 55.0;
+  g.y = 50.0;
+  g.rgbVal = RGBVal(0,255,0);
+  DrawLine(f,g);
+
+  h.x = 57.5;
+  h.y = 5.0;
+  h.rgbVal = RGBVal(0,255,0);
+
+  i.x = 57.5;
+  i.y = 50.0;
+  i.rgbVal = RGBVal(0,0,255);
+  DrawLine(h,i);
+
+
 
   for (unsigned int i_column = 0 ; i_column < _n_vertical; i_column++)
     for(unsigned int i_row = 0; i_row < _n_horizontal; i_row++){

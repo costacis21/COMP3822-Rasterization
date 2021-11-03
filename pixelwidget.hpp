@@ -45,6 +45,9 @@ public:
   //assignment1
   void DrawLine(pixel start_p, pixel end_p);
 
+  //assignment3
+  void DrawTriangle(pixel p, pixel r, pixel q);
+
 protected:
 
   virtual void paintEvent(QPaintEvent*);
