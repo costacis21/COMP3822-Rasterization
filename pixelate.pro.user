@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 5.0.2, 2021-11-02T16:48:03. -->
+<!-- Written by QtCreator 5.0.2, 2021-11-05T04:55:21. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -242,7 +242,7 @@
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="bool" key="RunConfiguration.UseTerminal">false</value>
+    <value type="bool" key="RunConfiguration.UseTerminal">true</value>
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">/home/giorgos/Documents/year 3/COMP3811 Computer Graphics/courseworks/coursework 1/coursework1_code/build-pixelate-Desktop_Qt_5_15_1_GCC_64bit-Debug</value>
    </valuemap>
    <value type="int" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
