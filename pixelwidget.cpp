@@ -57,21 +57,23 @@ void PixelWidget::DrawLine(pixel start_p, pixel end_p){
 
 
 
+    //calculate manhattan distance between the two points
+    float steps = fabs((end_p.x-start_p.x)) + fabs((end_p.y-start_p.y));
+    float stepsize=0.001;
+    for(int i = 0; i<steps; i++){ //number of steps = distance
 
-//    for(double i=1.0f;i>=0.00f;i-=0.01f){
 
+        //step size i/steps
 
-    for(double i =0.0f; i<=1.00f; i+=0.01f){
-//        double x = i*start_p.x + (1-i)*end_p.x;
-//        double y = i * start_p.y + (1-i)*end_p.y;
-        double x= (end_p.x + (i * (start_p.x-end_p.x)));
-        double y= (end_p.y + (i * (start_p.y-end_p.y)));
+        stepsize= i/steps;
+        float x= (end_p.x + (stepsize * (start_p.x-end_p.x)));
+        float y= (end_p.y + (stepsize * (start_p.y-end_p.y)));
 
         RGBVal newRGBVal;
         //add accumulative diff to each rgb val
-        newRGBVal._red= (end_p.rgbVal._red + (r_diff*-i));
-        newRGBVal._green= (end_p.rgbVal._green + (g_diff*-i));
-        newRGBVal._blue= (end_p.rgbVal._blue + (b_diff*-i));
+        newRGBVal._red= (end_p.rgbVal._red + (r_diff*-stepsize));
+        newRGBVal._green= (end_p.rgbVal._green + (g_diff*-stepsize));
+        newRGBVal._blue= (end_p.rgbVal._blue + (b_diff*-stepsize));
 
         //if diff exceeds max rgb val, remain ta max
         newRGBVal._red >= MAX_RGB ? newRGBVal._red = MAX_RGB : newRGBVal._red = newRGBVal._red;
