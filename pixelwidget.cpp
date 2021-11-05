@@ -59,8 +59,10 @@ void PixelWidget::DrawLine(pixel start_p, pixel end_p){
 
     //calculate manhattan distance between the two points
     float steps = fabs((end_p.x-start_p.x)) + fabs((end_p.y-start_p.y));
+    steps*=10;
     float stepsize=0.001;
-    for(int i = 0; i<steps; i++){ //number of steps = distance
+
+    for(int i = 0; i<=steps; i++){ //number of steps = distance
 
 
         //step size i/steps
@@ -117,11 +119,11 @@ void PixelWidget::paintEvent( QPaintEvent * )
   pixel a,b,c,d;
   a.x=20.3;
   a.y=0.0;
-  a.rgbVal=RGBVal(255,0,50);
+  b.rgbVal=RGBVal(255,0,50);
 
   b.x=0.6;
   b.y=20.8;
-  b.rgbVal=RGBVal(0,100,100);
+  a.rgbVal=RGBVal(0,100,100);
   DrawLine(b,a);
 
 
@@ -133,9 +135,6 @@ void PixelWidget::paintEvent( QPaintEvent * )
   d.x=20.6;
   d.y=20.8;
   c.rgbVal=RGBVal(100,255,200);
-
-
-
   DrawLine(d,c);
 
   for (unsigned int i_column = 0 ; i_column < _n_vertical; i_column++)
