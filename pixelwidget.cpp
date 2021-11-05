@@ -112,21 +112,16 @@ void PixelWidget::DrawTriangle(pixel p, pixel r, pixel q){
             }
 
 
-            double x= (a*p.x + b*q.x + (1-a-b)* q.x);
-            double y= (a*p.y + b*q.y + (1-a-b)* q.y);
+            double x= (a*p.x + b*q.x + (1-a-b)* r.x);
+            double y= (a*p.y + b*q.y + (1-a-b)* r.y);
             RGBVal newRGBVal;
             //add accumulative diff to each rgb val
-            newRGBVal._red= a*p.rgbVal._red + b*q.rgbVal._red + (1-a-b)* q.rgbVal._red;
-            newRGBVal._green= a*p.rgbVal._green + b*q.rgbVal._green + (1-a-b)* q.rgbVal._green;
-            newRGBVal._blue= a*p.rgbVal._blue + b*q.rgbVal._blue + (1-a-b)* q.rgbVal._blue;
+            newRGBVal._red= a*p.rgbVal._red + b*q.rgbVal._red + (1-a-b)* r.rgbVal._red;
+            newRGBVal._green= a*p.rgbVal._green + b*q.rgbVal._green + (1-a-b)* r.rgbVal._green;
+            newRGBVal._blue= a*p.rgbVal._blue + b*q.rgbVal._blue + (1-a-b)* r.rgbVal._blue;
+            SetPixel((int)x,(int)y, newRGBVal);
 
 
-
-            pixel x1;
-            x1.x =x;
-            x1.y = y;
-            x1.rgbVal = newRGBVal;
-            DrawLine(x1,r);
         }
 
 
