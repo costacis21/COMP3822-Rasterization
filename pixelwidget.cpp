@@ -59,17 +59,25 @@ void PixelWidget::DrawLine(pixel start_p, pixel end_p){
 
 
 
+    //calculate manhattan distance between the two points+
+    float steps = fabs((end_p.x-start_p.x)) + fabs((end_p.y-start_p.y));
+    steps*=5;
+    float stepsize=0.001;
 
-    for(double i =0.0f; i<=1.00f; i+=0.01f){
+    for(int i = 0; i<steps; i++){ //number of steps = distance
 
-        double x= (end_p.x + (i * (start_p.x-end_p.x)));
-        double y= (end_p.y + (i * (start_p.y-end_p.y)));
+
+        //step size i/steps
+
+        stepsize= i/steps;
+        float x= (end_p.x + (stepsize * (start_p.x-end_p.x)));
+        float y= (end_p.y + (stepsize * (start_p.y-end_p.y)));
 
         RGBVal newRGBVal;
         //add accumulative diff to each rgb val
-        newRGBVal._red= (end_p.rgbVal._red + (r_diff*-i));
-        newRGBVal._green= (end_p.rgbVal._green + (g_diff*-i));
-        newRGBVal._blue= (end_p.rgbVal._blue + (b_diff*-i));
+        newRGBVal._red= (end_p.rgbVal._red + (r_diff*-stepsize));
+        newRGBVal._green= (end_p.rgbVal._green + (g_diff*-stepsize));
+        newRGBVal._blue= (end_p.rgbVal._blue + (b_diff*-stepsize));
 
         //if diff exceeds max rgb val, remain ta max
         newRGBVal._red >= MAX_RGB ? newRGBVal._red = MAX_RGB : newRGBVal._red = newRGBVal._red;
@@ -95,25 +103,26 @@ void PixelWidget::DrawTriangle(pixel p, pixel r, pixel q){
     for(double a =0.0f; a<=1.0f; a+=0.01f){
         for(double b =0.0f; b<=1.0f; b+=0.01f){
 
-            double x= (a*p.x + b*q.x + (1-a-b)* q.x);
-            double y= (a*p.y + b*q.y + (1-a-b)* q.y);
+            if(a+b>1){
+                break;
+            }
+
+
+            double x= (a*p.x + b*q.x + (1-a-b)* r.x);
+            double y= (a*p.y + b*q.y + (1-a-b)* r.y);
             RGBVal newRGBVal;
             //add accumulative diff to each rgb val
-            newRGBVal._red= a*p.rgbVal._red + b*q.rgbVal._red + (1-a-b)* q.rgbVal._red;
-            newRGBVal._green= a*p.rgbVal._green + b*q.rgbVal._green + (1-a-b)* q.rgbVal._green;
-            newRGBVal._blue= a*p.rgbVal._blue + b*q.rgbVal._blue + (1-a-b)* q.rgbVal._blue;
+            newRGBVal._red= a*p.rgbVal._red + b*q.rgbVal._red + (1-a-b)* r.rgbVal._red;
+            newRGBVal._green= a*p.rgbVal._green + b*q.rgbVal._green + (1-a-b)* r.rgbVal._green;
+            newRGBVal._blue= a*p.rgbVal._blue + b*q.rgbVal._blue + (1-a-b)* r.rgbVal._blue;
+            SetPixel((int)x,(int)y, newRGBVal);
 
 
-
-            pixel x1;
-            x1.x =x;
-            x1.y = y;
-            x1.rgbVal = newRGBVal;
-            DrawLine(x1,r);
         }
 
 
     }
+
 
 }
 
