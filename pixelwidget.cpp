@@ -115,8 +115,21 @@ void PixelWidget::DrawTriangle(pixel p, pixel r, pixel q){
 
     }
 
+}
+
+
+bool PixelWidget::IsInside(pixel p, pixel r, pixel q, point f){
+
+
+
 
 }
+
+void PixelWidget::createFile(pixel p, pixel r, pixel q){
+
+}
+
+
 
 void PixelWidget::paintEvent( QPaintEvent * )
 {

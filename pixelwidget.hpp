@@ -22,6 +22,11 @@ public:
         RGBVal rgbVal;
 
     };
+
+    struct point{
+        unsigned int  x; // horizontal pixel coordinate
+        unsigned int  y; // vertical pixel coordinate
+    };
   
   // set the number of pixels that the widget is meant to display
   PixelWidget
@@ -47,6 +52,10 @@ public:
 
   //assignment3
   void DrawTriangle(pixel p, pixel r, pixel q);
+
+  //assignment4
+  bool IsInside(pixel p, pixel r, pixel q, point f);
+  void createFile(pixel p, pixel r, pixel q);
 
 protected:
 
