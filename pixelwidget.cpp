@@ -45,11 +45,15 @@ void PixelWidget::SetPixel(unsigned int i_column, unsigned int i_row, const RGBV
 
 void PixelWidget::DrawLine(pixel start_p, pixel end_p){
 
+    //calculate manhattan distance between the two points
+    float steps = fabs((end_p.x-start_p.x)) + fabs((end_p.y-start_p.y));
 
-    for(double i=1.0f;i>=0.00f;i-=0.01f){
+    for(int i = 0; i<steps; i++){ //number of steps = distance
 
-        double x= (end_p.x + (i * (start_p.x-end_p.x)));
-        double y= (end_p.y + (i * (start_p.y-end_p.y)));
+
+        //step size i/steps
+        float x= (end_p.x + ((i/steps) * (start_p.x-end_p.x)));
+        float y= (end_p.y + ((i/steps) * (start_p.y-end_p.y)));
 
         SetPixel((int)x,(int)y,RGBVal(255,0,255));
 
@@ -80,15 +84,15 @@ void PixelWidget::paintEvent( QPaintEvent * )
 
 
   pixel a,b,c,d;
-  a.x=20.3;
+  a.x=0.0;
   a.y=0.0;
-  b.x=0.6;
-  b.y=20.8;
+  b.x=69.0;
+  b.y=69.0;
 
   c.x=0.0;
-  c.y=0.0;
-  d.x=20.6;
-  d.y=20.8;
+  c.y=5.0;
+  d.x=13.65;
+  d.y=20.0;
 
 
   DrawLine(a,b);
